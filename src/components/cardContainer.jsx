@@ -52,15 +52,19 @@ function BoardGame() {
       const secondCard = cards[newSelectedCards[1]].face;
       if (firstCard === secondCard) {
         console.log("cool");
-        setIsFlipped(false);
+        setIsFlipped(true);
         setSelectedCards([]);
         console.log(selectedCards);
         setYesMessage("Nombres de paires trouvée : {4}");
       } else {
         console.log("manqué");
-        setIsFlipped(true);
-        setSelectedCards([]);
-        console.log(selectedCards);
+        setIsFlipped(false);
+
+        // Au lieu de vider immédiatement selectedCards, nous utilisons setTimeout
+        // pour le faire après un délai de 1000ms (1 seconde)
+        setTimeout(() => {
+          setSelectedCards([]);
+        }, 1000);
       }
     }
   };
@@ -71,7 +75,7 @@ function BoardGame() {
         <RandomButton onClick={schuffleCards} />
         <ResetButton message={yesMessage} />
         <button className="click-button" onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+          DEFOULE TON CLICK : {count}
         </button>
         ;
       </div>
