@@ -1,0 +1,55 @@
+#root {
+  margin: auto;
+  text-align: center;
+  background-color: rgb(27, 27, 70);
+  padding: 20px;
+  justify-content: center;
+}
+
+.App {
+  display: flex;
+  gap: 30px;
+  padding: 20px;
+  justify-content: center;
+}
+
+.mainBoard {
+  background-color: rgb(193, 193, 193);
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.boardGame {
+  background-color: rgb(193, 193, 193);
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 15px;
+}
+
+.card-style {
+  box-shadow: 0 0 5px 1px black;
+}
+
+.info1,
+.info2 {
+  font-size: 30px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: black;
+}
+
+.info1:hover,
+.info2:hover {
+  color: white;
+}
+
+.info3 {
+  font-size: 30px;
+  font-family: fantasy;
+  color: green;
+  text-shadow: 0px 10px 20px greenyellow;
+}
