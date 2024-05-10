@@ -13,6 +13,8 @@ function Cards(props) {
   const stylebackcard = {
     backgroundColor: props.face,
   };
+
+  // variable pour faire retourner les cartes au clic
   const [isFlipped, setIsFlipped] = useState(false); // hook pour gérer le state de la carte
 
   // ----- fonction pour retourner les cartes au clic

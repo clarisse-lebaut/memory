@@ -4,12 +4,15 @@
 //  - check the cards to find the pairs
 //  -
 
+//-------------------------------------------------------
 import React from "react";
 import { useState } from "react";
+import { useEffect } from "react";
 import Cards from "./cards";
 import ResetButton from "./resetBoutton";
 import RandomButton from "./randomButton";
-import SuccesMessage from "./successMessage";
+
+//-------------------------------------------------------
 
 function BoardGame() {
   // clicker
@@ -36,35 +39,31 @@ function BoardGame() {
     setCards(schuffleCards);
   };
 
-  // -------
   // vérifier correspondances des cartes
   const [selectedCards, setSelectedCards] = useState([]);
-  const [yesMessage, setYesMessage] = useState([]);
-  const [isFlipped, setIsFlipped] = useState(false); // hook pour gérer le state de la carte
-
   const CheckCards = (index) => {
     console.log(index);
+    // Mettre à jour les cartes sélectionner --> permet de l'aqvoir de manière assynchrone
     const newSelectedCards = [...selectedCards, index];
     setSelectedCards(newSelectedCards);
-
+    // Condition d'éxécution du programme
     if (newSelectedCards.length === 2) {
       const firstCard = cards[newSelectedCards[0]].face;
-      const secondCard = cards[newSelectedCards[1]].face;
+      const secondCard = cards[newSelectedCards[1]].face; // ici je récupère l'id de la carte
       if (firstCard === secondCard) {
         console.log("cool");
-        setIsFlipped(true);
         setSelectedCards([]);
         console.log(selectedCards);
-        setYesMessage("Nombres de paires trouvée : {4}");
       } else {
         console.log("manqué");
-        setIsFlipped(false);
-
-        // Au lieu de vider immédiatement selectedCards, nous utilisons setTimeout
-        // pour le faire après un délai de 1000ms (1 seconde)
+        console.log(selectedCards);
         setTimeout(() => {
           setSelectedCards([]);
-        }, 1000);
+          console.log("les cartes ne sont pas identiques, retour sur le face grise");
+          console.log(
+            "c'est ici que tu dois mettre à jour l'état de la carte, on s'en fout de ce qui se passe en dehors de la fonction"
+          );
+        }, 1500);
       }
     }
   };
@@ -73,15 +72,11 @@ function BoardGame() {
     <div>
       <div className="button-container">
         <RandomButton onClick={schuffleCards} />
-        <ResetButton message={yesMessage} />
+        <ResetButton />
         <button className="click-button" onClick={() => setCount((count) => count + 1)}>
           DEFOULE TON CLICK : {count}
         </button>
         ;
-      </div>
-
-      <div>
-        <SuccesMessage />
       </div>
 
       <div className="body-container">
@@ -89,8 +84,6 @@ function BoardGame() {
           <Cards
             key={card.id}
             face={card.face}
-            // ajouter un paramètre qui permet de récupérer le flipped ici pour le mettre a false et permettre le retournement de lac carte si elle ne correspondent pas
-            isFlipped={isFlipped}
             dos={card.dos}
             CheckCards={() => CheckCards(index)}
           />
